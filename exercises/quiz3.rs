@@ -18,16 +18,37 @@
 
 // I AM NOT DONE
 
+pub trait Printable {
+    fn print(&self) -> String;
+}
+
 pub struct ReportCard {
     pub grade: f32,
     pub student_name: String,
     pub student_age: u8,
 }
 
-impl ReportCard {
-    pub fn print(&self) -> String {
-        format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade)
+pub struct ReportCardAlpha {
+    pub grade: String,
+    pub student_name: String,
+    pub student_age: u8,
+}
+
+impl Printable for ReportCard {
+    fn print(&self) -> String {
+        format!(
+            "{} ({}) - achieved a grade of {}",
+            &self.student_name, &self.student_age, &self.grade
+        )
+    }
+}
+
+impl Printable for ReportCardAlpha {
+    fn print(&self) -> String {
+        format!(
+            "{} ({}) - achieved a grade of {}",
+            &self.student_name, &self.student_age, &self.grade
+        )
     }
 }
 
@@ -51,8 +72,8 @@ mod tests {
     #[test]
     fn generate_alphabetic_report_card() {
         // TODO: Make sure to change the grade here after you finish the exercise.
-        let report_card = ReportCard {
-            grade: 2.1,
+        let report_card = ReportCardAlpha {
+            grade: String::from("A+"),
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
         };
